@@ -1,16 +1,96 @@
-# React + Vite
+# 🧑‍💻 User Management App (React + Redux Toolkit)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React application built with **Redux Toolkit** and **React-Redux** to demonstrate how state management works using slices, reducers, and async API calls.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- User listing with API integration using **Axios**
+- Global state management using **Redux Toolkit**
+- Modular architecture with `store.js` and `slices`
+- Counter example for understanding reducers and actions
+- Separate slice for managing users
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Installation Steps
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1️⃣ Create a new React project
+If not already created, use:
+```bash
+npx create-react-app user-management-app
+
+###########################
+Move inside the project:
+cd user-management-app
+
+###########################
+Install dependencies :
+npm install @reduxjs/toolkit react-redux axios
+#################################################
+
+| Package              | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| **react**            | Frontend library for building UI                         |
+| **react-dom**        | Renders React components to the DOM                      |
+| **@reduxjs/toolkit** | Official, modern Redux library for easy state management |
+| **react-redux**      | React bindings for Redux                                 |
+| **axios**            | For API calls and HTTP requests                          |
+
+########################
+Folder Structure
+user-management-app/
+│
+├── src/
+│   ├── app/
+│   │   └── store.js          # Configures Redux store
+│   │
+│   ├── features/
+│   │   ├── counter/
+│   │   │   └── counterSlice.js
+│   │   └── users/
+│   │       └── userSlice.js
+│   │
+│   ├── components/
+│   │   ├── Counter.jsx       # Counter component using counter slice
+│   │   └── UserList.jsx      # Fetches and displays users
+│   │
+│   ├── App.js
+│   └── index.js              # Redux Provider + React DOM render
+│
+├── package.json
+└── README.md
+
+
+######################
+Flow of Execution :
+Redux Data Flow (Simplified)
+
+     ┌──────────────────────────────────────────┐
+     │                  UI                      │
+     │ (React Components - Counter, UserList)   │
+     └──────────────────────────────────────────┘
+                       │
+                       ▼
+            dispatch(action)  ---> (on button click or API call)
+                       │
+                       ▼
+     ┌──────────────────────────────────────────┐
+     │               Reducer / Slice            │
+     │ (counterSlice, userSlice)                │
+     └──────────────────────────────────────────┘
+                       │
+                       ▼
+     ┌──────────────────────────────────────────┐
+     │               Redux Store                │
+     │  (Global state - counter, users)         │
+     └──────────────────────────────────────────┘
+                       │
+                       ▼
+     ┌──────────────────────────────────────────┐
+     │           React Components               │
+     │ (useSelector → reads updated state)      │
+     └──────────────────────────────────────────┘
+
+
